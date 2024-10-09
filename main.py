@@ -7,7 +7,7 @@ import pygame
 from pygame.locals import *
 #check this out @enderplayz05
 #this is a pull request
-
+#this is a comment by @CIFamisaran
 
 # Alarm sound not yet included 
 pygame.mixer.init()
