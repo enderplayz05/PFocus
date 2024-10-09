@@ -5,7 +5,7 @@ import time
 import threading
 import pygame
 from pygame.locals import *
-#testing github pull request
+
 # Alarm sound not yet included 
 pygame.mixer.init()
 alarm_sound = pygame.mixer.Sound("alarm.wav")
