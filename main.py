@@ -5,9 +5,8 @@ import time
 import threading
 import pygame
 from pygame.locals import *
-
-
-# Alarm has been included
+#This is a comment for tutorial in github and source contorl
+# Alarm sound not yet included 
 pygame.mixer.init()
 alarm_sound = pygame.mixer.Sound("alarm.wav")
 
@@ -17,6 +16,7 @@ class PomodoroApp(tk.Tk):
         super().__init__()
         self.title("Pomodoro Timer")
         self.geometry("400x500")
+        self.config(bg="lightgray")
 
         self.default_work_time = 25 * 60  # Default: 25 minutes in seconds
         self.default_break_time = 5 * 60  # Default: 5 minutes in seconds
@@ -25,34 +25,41 @@ class PomodoroApp(tk.Tk):
         self.timer_running = False
         self.completed_cycles = 0
 
-
-        # Timer Display
-        self.timer_label = tk.Label(self, text=self.format_time(self.current_time), font=("Arial", 48))
-        self.timer_label.pack(pady=20)
-
         # Cycle Counter
         self.cycle_counter_label = tk.Label(self, text=f"Cycles: {self.completed_cycles}")
         self.cycle_counter_label.pack()
+        self.cycle_counter_label.place(x=320, y=10)
+        
 
+        # Timer Display
+        self.timer_label = tk.Label(self, text=self.format_time(self.current_time), font=("roboto", 48))
+        self.timer_label.pack(pady=20)  #creates space between top and bottom
+ 
         # Start/Stop Button
         self.start_stop_button = tk.Button(self, text="Start", command=self.toggle_timer)
-        self.start_stop_button.pack(pady=10)
+        self.start_stop_button.pack(pady=20)
+        self.start_stop_button.config(width=20) 
+        
+        
 
         # Timer Customization
         self.work_time_input = tk.Entry(self)
-        self.work_time_input_label = tk.Label(self, text="WORK IN MINUTES",font=("Arial", 12))
-        self.work_time_input.insert(0, "")
+        self.work_time_input_label = tk.Label(self, text="Work in Minutes",font=("Arial", 12))
+        self.work_time_input.insert(0, "", )
         self.work_time_input_label.pack()
-        self.work_time_input.pack()
-
+        self.work_time_input.pack(pady=20) #creates space between top and bottom
+       
         self.break_time_input = tk.Entry(self)
-        self.break_time_input_label = tk.Label(self, text="BREAK IN MINUTES",font=("Arial", 12))
+        self.break_time_input_label = tk.Label(self, text="Break in Minutes",font=("Arial", 12))
         self.break_time_input.insert(0, "")
         self.break_time_input_label.pack()
         self.break_time_input.pack()
+       
 
         set_timer_button = tk.Button(self, text="Set Timer", command=self.set_custom_times)
         set_timer_button.pack()
+        set_timer_button.pack(pady=10)
+        set_timer_button.config(width=20)  
 
         # Task Input
         self.task_input_label = tk.Label(self, text="ADD A TASK",font=("Arial", 12))
@@ -63,10 +70,13 @@ class PomodoroApp(tk.Tk):
 
         add_task_button = tk.Button(self, text="Add Task", command=self.add_task)
         add_task_button.pack()
+        add_task_button.config(width=20)  
+        
+        
 
         # Task List
-        self.task_list = tk.Listbox(self, justify="center",font=("Arial", 20))
-        self.task_list.pack(pady=10, fill="both", expand=True)
+        self.task_list = tk.Listbox(self, justify="center", font=("Arial", 20))
+        self.task_list.pack(pady=10, padx=40, fill="x", expand=True)
 
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
