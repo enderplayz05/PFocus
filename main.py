@@ -4,7 +4,7 @@ from tkinter import simpledialog
 import time
 import threading
 import pygame
-from pygame.locals import *
+from pygame import mixer
 
 #Alarm from usage of pygame library
 pygame.mixer.init()
@@ -14,9 +14,10 @@ class PomodoroApp(tk.Tk):
     
     def __init__(self):
         super().__init__()
-        self.title("Pomodoro Timer")
+        self.title("PFocus")
         self.geometry("400x500")
         self.config(bg="lightgray")
+        self.resizable(False,False)         #This disables the option for fullscreen mode
 
         self.default_work_time = 25 * 60  # Default: 25 minutes in seconds
         self.default_break_time = 5 * 60  # Default: 5 minutes in seconds
@@ -37,36 +38,36 @@ class PomodoroApp(tk.Tk):
  
         # Start/Stop Button
         self.start_stop_button = tk.Button(self, text="Start", command=self.toggle_timer)
-        self.start_stop_button.pack(pady=20)
-        self.start_stop_button.config(width=20) 
+        self.start_stop_button.pack(pady=10)
+        self.start_stop_button.config(width=20,height=2) 
         
         
 
         # Timer Customization
-        self.work_time_input = tk.Entry(self)
-        self.work_time_input_label = tk.Label(self, text="Work in Minutes",font=("Arial", 12))
-        self.work_time_input.insert(0, "", )
-        self.work_time_input_label.pack()
-        self.work_time_input.pack(pady=20) #creates space between top and bottom
+        self.work_time_input = tk.Entry(self, font=('Arial 20'), width=10)
+        self.work_time_input_label = tk.Label(self, text="Work in Minutes",font=("Arial", 18))
+        self.work_time_input.insert(0, "")
+        self.work_time_input_label.place(x=25,y=185)
+        self.work_time_input.pack(anchor="ne",padx=30,pady=5) #creates space between top and bottom
        
-        self.break_time_input = tk.Entry(self)
-        self.break_time_input_label = tk.Label(self, text="Break in Minutes",font=("Arial", 12))
+        self.break_time_input = tk.Entry(self, font=('Arial 20'),width=10)
+        self.break_time_input_label = tk.Label(self, text="Break in Minutes",font=("Arial", 18))
         self.break_time_input.insert(0, "")
-        self.break_time_input_label.pack()
-        self.break_time_input.pack()
+        self.break_time_input_label.place(x=20,y=232)
+        self.break_time_input.pack(anchor="ne",padx=30,pady=5)
        
 
         set_timer_button = tk.Button(self, text="Set Timer", command=self.set_custom_times)
         set_timer_button.pack()
-        set_timer_button.pack(pady=10)
+        set_timer_button.pack()
         set_timer_button.config(width=20)  
 
         # Task Input
-        self.task_input_label = tk.Label(self, text="ADD A TASK",font=("Arial", 12))
-        self.task_input = tk.Entry(self)
+        self.task_input_label = tk.Label(self, text="ADD A TASK",font=("Arial", 18))
+        self.task_input = tk.Entry(self,font=('Arial 20'),width=10)
         self.task_input.insert(0, "")
-        self.task_input_label.pack()
-        self.task_input.pack()
+        self.task_input_label.place(x=30,y=318)
+        self.task_input.pack(anchor="ne",padx=60,pady=20)
 
         add_task_button = tk.Button(self, text="Add Task", command=self.add_task)
         add_task_button.pack()
