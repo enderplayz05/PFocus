@@ -128,7 +128,7 @@ class PomodoroApp(tk.Tk):
 
     def show_alarm(self):
         self.timer_running = False
-        self.start_stop_button.config(text="Start")
+        self.start_stop_button.config(text="Pause")
         pygame.mixer.Sound.play(alarm_sound)
 
         # Alarm notification
@@ -142,6 +142,9 @@ class PomodoroApp(tk.Tk):
             self.cycle_counter_label.config(text=f"Cycles: {self.completed_cycles}")
         self.timer_label.config(text=self.format_time(self.current_time))
         pygame.mixer.stop()
+        self.timer_running = True           #makes sure that once clicking okay on the messagebox 
+        self.run_timer()                    #It goes to the next timer whether work to break vice versa
+
 
     def on_closing(self):
         self.timer_running = False
