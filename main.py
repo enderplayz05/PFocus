@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import simpledialog
+from tkinter import PhotoImage
 import time
 import threading
 import pygame
@@ -18,7 +19,8 @@ class PomodoroApp(tk.Tk):
         self.geometry("400x500")
         self.config(bg="lightgray")
         self.resizable(False,False)         #This disables the option for fullscreen mode
-
+        icon = PhotoImage(file='icon.png')
+        self.iconphoto(False,icon)
         self.default_work_time = 25 * 60  # Default: 25 minutes in seconds
         self.default_break_time = 5 * 60  # Default: 5 minutes in seconds
         self.current_time = self.default_work_time
